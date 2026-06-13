@@ -10,13 +10,13 @@ venv/
 ENV/
 env/
 
-# IDE and Editor
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Distribution / packaging
+# Distribution
 build/
 dist/
 *.egg-info/
