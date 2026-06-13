@@ -1,133 +1,87 @@
 # GitHub User Activity CLI
 
-A simple Command Line Interface (CLI) application that fetches and displays the recent activity of a GitHub user using the GitHub API.
+A simple Command Line Interface (CLI) that fetches and displays the recent activity of a GitHub user using the GitHub API.
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [API Endpoint](#api-endpoint)
-- [Error Handling](#error-handling)
-- [Examples](#examples)
-- [Optional Enhancements](#optional-enhancements)
-- [Learning Outcomes](#learning-outcomes)
-
-## Overview
-
-This project helps practice working with APIs, handling JSON data, building CLI applications, error handling, and parsing command-line arguments.
-
-The application runs from the command line, accepts a GitHub username as an argument, fetches the user's recent activity, and displays it in a readable format.
+![Python](https://img.shields.io/badge/Python-3.14-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Features
-
-- Fetch recent GitHub user events via public API
-- Display activity in human-readable format (e.g., pushes, issues, stars)
-- Graceful error handling for invalid users, network issues, etc.
-- No external libraries for HTTP requests (use built-in capabilities)
-- Pure command-line interface
-
-## Requirements
-
-- Any programming language of your choice (e.g., Python, Node.js, Go, etc.)
-- Internet access for API calls
-- Command-line environment
+- Fetch recent public activity from GitHub API
+- Beautiful colored terminal output with timestamps
+- Proper error handling (user not found, rate limit, network issues)
+- Clean and readable activity display
+- No external heavy frameworks — only `requests` and `colorama`
 
 ## Installation
 
-1. Clone or download the project repository.
-2. Ensure you have the required runtime for your chosen language (e.g., Python 3.x).
-3. No additional dependencies needed for core functionality.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/amirhossein-rajabi/github-activity-cli.git
+   cd github-activity-cli
+   ```
 
-```bash
-# Example for Python
-git clone <repository-url>
-cd github-activity-cli
-# Run directly with python
-```
+2. Create and activate virtual environment:
+   ```bash
+   python -m venv venv
+   venv\Scripts\activate     # For Windows
+   # source venv/bin/activate   # For Linux / Mac
+   ```
+
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## Usage
 
 ```bash
-github-activity <username>
+python main.py <username>
 ```
 
-**Example:**
-
+**Examples:**
 ```bash
-github-activity kamranahmedse
+python main.py torvalds
+python main.py kamranahmedse
+python main.py amirhossein-rajabi
 ```
 
-**Expected Output:**
-
+## Example Output
 ```
-- Pushed 3 commits to kamranahmedse/developer-roadmap
-- Opened a new issue in kamranahmedse/developer-roadmap
-- Starred kamranahmedse/developer-roadmap
-- Forked kamranahmedse/developer-roadmap
+Fetching recent activity for user: torvalds...
+
+Recent activity for user (showing up to 10 events):
+
+• Pushed to torvalds/linux (2026-06-13 00:54)
+• Pushed to torvalds/GitPedal (2026-06-12 21:14)
+• Starred some-repo (2026-06-12 18:30)
 ```
 
 ## Project Structure
-
 ```
 github-activity-cli/
+├── main.py                 # CLI entry point
+├── github_activity.py      # Core logic + API handling
+├── requirements.txt
 ├── README.md
-├── src/          # Source code directory
-│   └── main.<ext> # Main CLI script (e.g., main.py)
-└── ...           # Other files as needed
+├── .gitignore
+└── tests/
+    └── test_github_activity.py
 ```
 
-## API Endpoint
-
-Use the GitHub Events API:
-
-```
-GET https://api.github.com/users/{username}/events
-```
-
-**Reference:** [GitHub API Documentation](https://docs.github.com/en/rest)
+## Technologies Used
+- **Python 3.14**
+- `requests` — for GitHub API calls
+- `colorama` — for colored terminal output
 
 ## Error Handling
-
-The application handles:
-
-- Invalid GitHub usernames → "Error: User not found"
-- Network or API failures
-- Empty activity responses
-- Rate limiting (consider adding delays or messages)
-
-## Examples
-
-See usage section above.
-
-Additional example with error:
-
-```bash
-github-activity nonexistentuser12345
-```
-
-Output:
-```
-Error: User not found
-```
-
-## Optional Enhancements
-
-- Filter activity by event type
-- Colored terminal output
-- Pagination support
-- Caching responses
-- Display timestamps
-- Fetch additional repo/user info
-- Interactive mode
+- Invalid username → Clear message
+- Network / API failures
+- Rate limiting by GitHub
+- Empty activity
 
 ## Learning Outcomes
-
-- REST API integration
-- JSON parsing
-- CLI argument parsing
-- HTTP requests with standard libraries
-- Robust error handling
-- Terminal output formatting
+- Working with REST APIs
+- JSON data parsing
+- Building CLI applications
+- Command-line argument parsing
+- Error handling & Git workflow
